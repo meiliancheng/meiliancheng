@@ -1,0 +1,73 @@
+
+
+.areaItem{
+    width: auto;
+    max-width: 768px;
+    margin: 10px auto;
+    background-color: var(--bg-second);
+    padding: 16px;
+    .areaHead{
+        width: 100%;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        b{
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 500;
+            width: 32px;
+            height: 32px;
+            color: white;
+            font-size: 18px;
+        }
+        >span:nth-child(2){
+            margin-left: 10px;
+            font-size: 14px;
+            font-weight: bold; 
+        }
+        span.hf{
+            margin: 0 10px ;
+        }
+        span.nameT{
+            font-weight: bold;
+            color:#FF007D;
+        }
+    }
+    .areaMain{
+       overflow: hidden;
+        >div:nth-child(1){
+            font-size: 14px;
+            line-height: 20px;
+            padding: 11.2px 0;
+            margin: 10px 10px 0 0;
+            letter-spacing:2px;
+            flex-wrap: wrap;
+            margin-right: 10px;
+        }
+        padding-left: 42px;
+        
+    }
+    .message{
+        font-size: 14px;
+        span,path{
+            color:  var(--disable-text-color);
+
+        }
+        >span:nth-child(2){
+            margin-left: 20px;
+        }
+        >span:nth-child(3){
+            margin-left: 20px;
+        }
+        >span:nth-child(3):hover{
+            path{
+                color: #FF0466;
+            }
+            cursor: pointer;
+            color: #FF0466;
+        }
+    }
+    
+}

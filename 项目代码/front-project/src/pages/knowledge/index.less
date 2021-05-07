@@ -1,0 +1,60 @@
+.knowledgeIndex {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-body);
+  display: flex;
+  position: relative;
+  .list {
+    width: 60%;
+    height: 100%;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .listItem {
+      width: 100%;
+      height: 220px;
+      border-radius: 0.21322rem;
+      background-color: var(--bg-second);
+      border-bottom: none;
+      color: var(--main-text-color);
+      margin-top: 0.599574rem;
+      margin-bottom: 0.266525rem;
+      img {
+        width: 6.476546rem;
+        border-radius: 0.21322rem;
+        margin-left: 0.266525rem;
+      }
+      > div {
+        height: 100%;
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 0.37037rem;
+        margin-right: 270px;
+        h2 {
+          font-weight: 800;
+        }
+        p:nth-child(2) {
+          overflow: hidden;
+        }
+        p:nth-child(3) {
+          letter-spacing: 2px;
+        }
+      }
+    }
+  }
+  .listItem:hover {
+    h2 {
+      color: #ff0064;
+    }
+  }
+  .Category {
+    width: 6.028785rem;
+    position: sticky;
+    top: 0px;
+    margin-top: 0.599574rem;
+    margin-left: 0.533049rem;
+  }
+}

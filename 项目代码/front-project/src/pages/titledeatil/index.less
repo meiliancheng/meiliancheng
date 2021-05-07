@@ -1,0 +1,89 @@
+.deatilIndex {
+  width: 100%;
+  height: 100%;
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+  background-color: #ccc;
+  display: flex;
+  .mian {
+    width: 14.918519rem;
+    height: 18.518519rem;
+    background: var(--bg-second);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-left: 180px;
+    text-align: center;
+    padding-top: 1px;
+    overflow-y: scroll;
+    h1 {
+      margin: 30px 0px;
+      font-size: 0.740741rem;
+    }
+
+    .Iem {
+      font-style: italic;
+      font-size: 16px;
+      display: block;
+      margin: 10px;
+    }
+  }
+  .adside {
+    width: 320px;
+    height: 100%;
+    margin-left: 25px;
+    .readTop {
+      width: 100%;
+      height: 4.814815rem;
+      background-color: #fff;
+      overflow-y: scroll;
+      padding: 20px;
+      border-radius: 6px;
+      li {
+        height: 32px;
+        line-height: 32px;
+        font-size: 14px;
+        padding-left: 10px;
+        border-radius: 6px;
+      }
+      li:hover {
+        background-color: #e7eaee;
+        a {
+          color: #ff0096;
+        }
+      }
+      .active {
+        color: #ff0096;
+      }
+    }
+    .botmu {
+      width: 100%;
+      height: 251px;
+      overflow-y: auto;
+      margin-top: 20px;
+      header {
+        font-weight: 800;
+        font-size: 16px;
+        margin: 12px;
+      }
+      .list {
+        font-size: 14px;
+        list-style-type: disc;
+        > li {
+          padding: 8px;
+          margin-left: 20px;
+          span {
+            margin-left: 10px;
+          }
+        }
+        li:hover {
+          color: #ff0096;
+          cursor: pointer;
+          span {
+            color: #ff0096;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
