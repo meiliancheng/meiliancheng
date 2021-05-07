@@ -1,0 +1,14 @@
+img {
+    width: 900px;
+    height: 500px;
+}
+.wrapper {
+    height: 1000px;
+    overflow: hidden;
+    border: 1px solid #42b983;
+}
+
+.wrapper p {
+    height: 500px;
+    text-align: center;
+}

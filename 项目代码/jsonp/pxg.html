@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        let obj = {
+            doubleCount: 15,
+            createElement: undefined,
+            createDailog: undefined
+        }
+
+        let newObj = new Promise(obj, {
+            // 补全代码
+            get: function () {
+                console.log(obj)
+            },
+
+        },
+        // 要求
+        // 1. newObj.doubleCount ===> 30
+        // 2. newObj.createElement('p', {class: 'p', style: 'width: 200px'}, '我是需要创建的p元素', '这个也是属于p元素的内容') ===> 返回一个创建好的p元素
+        // 3. newObj.createDailog(
+        //     {
+        //         top: '这是弹框的标题',
+        //         content: '这是弹框的内容',
+        //         bottom: [
+        //             {text: '取消', cbk: () => {
+        //                     console.log('用户点击的是取消按钮')
+        //                 }
+        //             }，
+        //             {text: '确定', cbk: () => {
+        //                     console.log('用户点击的是确定按钮')
+        //                 }
+        //             }
+        //         ]
+        //     }
+        // ) ===> 根据给定参数创建出对应的弹框top对应标题的展示，content对应的中间内容展示，bottom对应的底部button的展示，再点击对应的按钮触发对应的回调函数
+    </script>
+</body>
+
+</html>

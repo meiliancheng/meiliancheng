@@ -1,0 +1,71 @@
+{
+    "pages": [
+        {
+            "path": "pages/index/index",
+            "style": {
+                "navigationBarTitleText": "一面而就"
+            }
+        },
+        {
+            "path": "pages/my/index",
+            "style": {
+                "navigationBarTitleText": "个人中心"
+            }
+        },
+        {
+            "path": "pages/my/auth",
+            "style": {
+                "navigationBarTitleText": "生物认证"
+            }
+        },
+        {
+            "path": "pages/my/pay",
+            "style": {
+                "navigationBarTitleText": "支付中心"
+            }
+        },
+        {
+            "path": "pages/sign/addSign",
+            "style": {
+                "navigationBarTitleText": "添加面试"
+            }
+        },
+        {
+            "path": "pages/sign/signList",
+            "style": {
+                "navigationBarTitleText": "面试列表"
+            }
+        },
+        {
+            "path": "pages/sign/suggestion",
+            "style": {
+                "navigationBarTitleText": "地址搜索"
+            }
+        },
+
+        {
+            "path": "pages/sign/suggestionsite",
+            "style": {
+                "navigationBarTitleText": "地址选点"
+            }
+        },
+        {
+            "path": "pages/sign/signDetail",
+            "style": {
+                "navigationBarTitleText": "面试详情"
+            }
+        }
+    ],
+    "globalStyle": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "uni-app",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#F8F8F8"
+    },
+    "easycom": {
+        "autoscan": true,
+        "custom": {
+            "^van-(.*)": "@/static/vant/$1/index"
+        }
+    }
+}

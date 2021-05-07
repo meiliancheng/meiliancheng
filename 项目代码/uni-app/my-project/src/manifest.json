@@ -1,0 +1,27 @@
+{
+    "name": "",
+    "appid": "",
+    "description": "",
+    "versionName": "1.0.0",
+    "versionCode": "100",
+    "transformPx": false,
+
+    "mp-weixin": {
+        "appid": "wx3375420e2c184d34",
+        "setting": {
+            "urlCheck": false
+        },
+        "usingComponents": true,
+        "permission": {
+            "scope.userLocation": {
+                "desc": "你的位置信息请授权你的位置"
+            }
+        },
+        "plugins": {
+            "chooseLocation": {
+                "version": "1.0.6",
+                "provider": "wx76a9a06e5b4e693e"
+            }
+        }
+    }
+}
