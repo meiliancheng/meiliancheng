@@ -2,14 +2,23 @@
 <script>
 const chooseLocation = requirePlugin("chooseLocation");
 const key = "WCLBZ-Q6L6S-C4NO6-6BPPE-OEV2F-52FGA";
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
     onShow() {
         const location = chooseLocation.getLocation();
 
         if (location) {
-            this.$store.commit("getAddress", location.address);
-            wx.navigateTo({ url: "/pages/sign/addSign" });
+            this.updateState({
+                key: "address",
+                value: location,
+            });
         }
+        wx.navigateTo({ url: "/pages/sign/addSign" });
+    },
+    methods: {
+        ...mapMutations({
+            updateState: "addsign/updateState",
+        }),
     },
     created() {
         // const key = ""; //使用在腾讯位置服务申请的key

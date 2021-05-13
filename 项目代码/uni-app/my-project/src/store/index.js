@@ -1,32 +1,24 @@
-import Vue from "vue";
 import Vuex from "vuex";
+// import createLogger from "vuex/dist/logger";
+import Vue from "vue";
+// 引入子模块
+import addsign from "./modules/addsign.js";
+import sign from "./modules/sign";
+import pay from "./modules/pay.js";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-    state: {
-        count: 0,
-        address: "",
-        company: "",
-        phone: "",
-        id: "",
+const store = new Vuex.Store({
+    modules: {
+        addsign,
+        sign,
+        pay,
     },
-    mutations: {
-        getAddress(state, data) {
-            //赋值地址
-            state.address = data;
-        },
-        //存储公司名和手机号
-        getObj(state, obj) {
-            //分别进行赋值
-            state.company = obj.company;
-            state.phone = obj.phone;
-        },
-        getid(state, id) {
-            console.log(id);
-            state.id = id;
-        },
-    },
+    state: {},
+    getters: {},
+    mutations: {},
     actions: {},
-    modules: {},
+    // plugins: process.env.NODE_ENV !== "production" ? [createLogger()] : [],
 });
+
+export default store;

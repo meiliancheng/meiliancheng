@@ -13,5 +13,4 @@ function timestampToTime(timestamp) {
             : date.getMinutes();
     return Y + M + D + h + m;
 }
-
 export default timestampToTime;

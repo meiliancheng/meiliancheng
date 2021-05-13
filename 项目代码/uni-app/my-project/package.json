@@ -66,7 +66,7 @@
     "node-less": "^1.0.0",
     "node-sass": "^5.0.0",
     "regenerator-runtime": "^0.12.1",
-    "sass-loader": "^11.0.1",
+    "sass-loader": "^10.1.1",
     "vant": "^2.12.16",
     "vant-weapp": "^0.5.29",
     "vue": "^2.6.11",

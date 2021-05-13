@@ -1,213 +1,154 @@
 <template>
-    <div class="list">
-        <van-tabs
-            :active="active"
-            @onchange="onChange"
-            title-active-color="#197DBF"
-            color="#197DBF"
-        >
-            <van-tab title="未开始">
-                <li
-                    v-for="(item, index) in notlist"
-                    :key="index"
-                    @click="detailSign(item)"
+    <div>
+        <header>
+            <span
+                @click="updateState({ key: 'status', value: index - 1 })"
+                :class="index - 1 === status ? 'active' : ''"
+                v-for="(item, index) in headers"
+                :key="item"
+                >{{ item }}</span
+            >
+        </header>
+        <div style="height:90rpx"></div>
+        <div class="wrap">
+            <section v-if="signList.length" style="width:100%">
+                <navigator
+                    :url="`/pages/sign/signDetail?id=${item.id}`"
+                    v-for="item in signList"
+                    :key="item.id"
                 >
-                    <h2>{{ item.company }} <span>已打卡</span></h2>
-                    <p>{{ item.address.address || item.address }}</p>
+                    <p>{{ item.company }}</p>
                     <p>
-                        面试时间:{{ dataTime(item.start_time * 1)
-                        }}<span>已提醒</span>
-                    </p>
-                </li>
-            </van-tab>
-            <van-tab title="已打卡">
-                <li v-for="(item, index) in Hasclock" :key="index">
-                    <h2>{{ item.company }} <span>已打卡</span></h2>
-                    <p>
-                        {{ item.address.address || item.address }}
+                        {{ item.address.address }}
                     </p>
                     <p>
-                        面试时间:{{ dataTime(item.start_time * 1) }}
-                        <span>已提醒</span>
+                        <span
+                            >面试时间：{{ item.start_time | formatTime }}</span
+                        >
                     </p>
-                </li>
-            </van-tab>
-            <van-tab title="已放弃">
-                <li v-for="(item, index) in getup" :key="index">
-                    <h2>{{ item.company }} <span>已打卡</span></h2>
-                    <p>
-                        {{ item.address.address || item.address }}
-                    </p>
-                    <p>
-                        面试时间:{{ dataTime(item.start_time * 1) }}
-                        <span>已提醒</span>
-                    </p>
-                </li>
-            </van-tab>
-            <van-tab title="全部">
-                <li v-for="item in list" :key="item.create_time">
-                    <h2>{{ item.company }}</h2>
-                    <p>
-                        {{ item.address.address || item.address }}
-                    </p>
-                    <p>面试时间:{{ dataTime(item.start_time * 1) }}</p>
-                </li>
-            </van-tab>
-        </van-tabs>
+                    <span>{{ headers[item.status + 1] }}</span>
+                </navigator>
+            </section>
+            <span v-else>当前分类没有面试!</span>
+        </div>
     </div>
 </template>
 
 <script>
-import { getSignList } from "@/servers/index";
-import time from "../../utils/dateTime";
+import { mapState, mapMutations, mapActions } from "vuex";
+
 export default {
-    data() {
-        return {
-            list: [],
-            active: 0,
-            notlist: [],
-            Hasclock: [],
-            getup: [],
-            dataTime: time,
-            page: 1,
-            pageSize: 20,
-        };
+    filters: {
+        formatTime(val) {
+            let date = new Date(+val);
+            let year = date.getFullYear(),
+                month = String(date.getMonth() + 1).padStart(2, "0"),
+                day = String(date.getDate()).padStart(2, "0"),
+                hour = String(date.getHours()).padStart(2, "0"),
+                min = String(date.getMinutes()).padStart(2, "0");
+            return `${year}-${month}-${day} ${hour}:${min}`;
+        },
     },
-    async created() {
-        //请求面试列表数据
-        let { page, pageSize } = this;
-        let notlist = await getSignList({ status: -1, remind: -1 });
-        let Hasclock = await getSignList({ status: 0, remind: -1 });
-        let getup = await getSignList({ status: 1, remind: -1 });
-        let res = await getSignList({ page, pageSize });
-        if (notlist.code === 0) {
-            this.notlist = notlist.data.map((item) => {
-                if (this.isJSON_test(item.address)) {
-                    let address = JSON.parse(item.address);
-                    item.address = address;
-                    return item;
-                } else {
-                    return item;
-                }
-            });
-        }
-        if (Hasclock.code === 0) {
-            this.Hasclock = Hasclock.data.map((item) => {
-                if (this.isJSON_test(item.address)) {
-                    let address = JSON.parse(item.address);
-                    item.address = address;
-                    return item;
-                } else {
-                    return item;
-                }
-            });
-        }
-        if (getup.code === 0) {
-            this.getup = getup.data.map((item) => {
-                if (this.isJSON_test(item.address)) {
-                    let address = JSON.parse(item.address);
-                    item.address = address;
-                    return item;
-                } else {
-                    return item;
-                }
-            });
-        }
-        if (res.code === 0) {
-            this.list = res.data.map((item) => {
-                if (this.isJSON_test(item.address)) {
-                    let address = JSON.parse(item.address);
-                    item.address = address;
-                    return item;
-                } else {
-                    return item;
-                }
-            });
-        }
+    computed: {
+        ...mapState({
+            signList: (state) => state.sign.signList,
+            page: (state) => state.sign.page,
+            status: (state) => state.sign.status,
+        }),
+        headers() {
+            return ["未开始", "已打卡", "已放弃", "全部"];
+        },
+    },
+    watch: {
+        status: {
+            handler() {
+                this.updateState({ key: "page", value: 1 });
+                this.getSignList();
+            },
+            immediate: true, // 立即执行
+            // deep: true  // 深度监听
+        },
     },
     methods: {
-        isJSON_test(str) {
-            if (typeof str == "string") {
-                try {
-                    var obj = JSON.parse(str);
-                    return true;
-                } catch (e) {
-                    return false;
-                }
-            }
-        },
-        //详情数据
-        detailSign(item) {
-            //跳转带详情页
-            wx.navigateTo({ url: `/pages/sign/signDetail` });
-
-            this.$store.commit("getid", item.id);
-        },
+        ...mapMutations({
+            updateState: "sign/updateState",
+        }),
+        ...mapActions({
+            getSignList: "sign/getSignList",
+        }),
     },
-    onChange(event) {
-        wx.showToast({
-            title: `切换到标签 ${event.detail.name}`,
-            icon: "none",
-        });
+    async onPullDownRefresh() {
+        this.updateState({ key: "page", value: 1 });
+        await this.getSignList();
+        wx.stopPullDownRefresh();
+    },
+    onReachBottom() {
+        if (this.page * 10 === this.signList.length) {
+            this.updateState({ key: "page", value: this.page + 1 });
+            this.getSignList();
+        } else {
+            wx.showToast({
+                icon: "none",
+                title: "没有更多数据了",
+            });
+        }
     },
 };
 </script>
 
-<style lang="scss" scoped>
-.list {
+<style scoped lang="scss">
+header {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
+    height: 90rpx;
     display: flex;
-    background: #eeeeee;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+    span {
+        text-align: center;
+        width: 20%;
+    }
+    span.active {
+        color: skyblue;
+    }
+}
+
+.wrap {
+    display: flex;
     flex-direction: column;
-    li {
-        width: 95%;
+    align-items: center;
+    background: #eeeeee;
+    navigator {
+        width: 100%;
         height: 140px;
         background: #fff;
-        line-height: 40px;
-        margin-bottom: 5%;
-        padding-left: 4%;
-        h2 {
-            font-size: 26px;
-            span {
-                float: right;
-                font-size: 18px;
-                display: inline-block;
-                width: 80px;
-                height: 35px;
-                margin: 5px;
-                text-align: center;
-                line-height: 35px;
-                background: #ecf6ff;
-                border: #60aeff;
-                color: #49a3ff;
-            }
+        padding-left: 3%;
+        p:nth-child(1) {
+            font-size: 30px;
         }
         p:nth-child(2) {
-            width: 100%;
-            height: 35px;
-            font-size: 18px;
-            overflow: hidden;
-            color: #a2a2a2;
+            font-size: 16px;
         }
         p:nth-child(3) {
-            width: 100%;
-            height: 50px;
-            color: #777777;
-            font-size: 20px;
-            span {
-                float: right;
-                font-size: 18px;
-                display: inline-block;
-                width: 80px;
-                height: 35px;
-                margin: 5px;
-                border: #60aeff;
-                color: #49a3ff;
-                text-align: center;
-                line-height: 35px;
-                background: #ecf6ff;
-            }
+            font-size: 24px;
+            color: #ccc;
+        }
+        > span {
+            float: right;
+            display: block;
+            width: 60px;
+            height: 40px;
+            border: #409eff;
+            color: #409eff;
+            background: #ecf6ff;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 3%;
         }
     }
 }

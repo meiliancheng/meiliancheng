@@ -13,6 +13,7 @@ export default {
                             code: res.code,
                         }
                     );
+                    wx.setStorageSync("phone", result.data.data.phone);
                     wx.setStorageSync("openid", result.data.data.openid);
                 } else {
                     console.log("登录失败!", res.errMsg);

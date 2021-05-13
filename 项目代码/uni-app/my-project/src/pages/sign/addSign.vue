@@ -37,7 +37,7 @@
                 ><input
                     class="weui-input"
                     placeholder="请选择面试地址"
-                    v-model="address"
+                    v-model="address.address"
                     @click="addrresSearch"
                     disabled
                 />
@@ -103,6 +103,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from "vuex";
 import Toast from "@vant/weapp/dist/toast/toast.js";
 import Dialog from "@vant/weapp/dist/dialog/dialog";
 import { addSign } from "../../servers/index";
@@ -129,7 +130,6 @@ export default {
         const Minute = Minutes[0];
         return {
             start_time: "",
-            address: this.$store.state.address,
             show: false,
             year,
             month,
@@ -150,7 +150,17 @@ export default {
     updated() {
         this.start_time = `${this.year}-${this.month}-${this.day} ${this.Hour}:${this.Minute}`;
     },
+    computed: {
+        ...mapState({
+            // companys: (state) => state.addsign.company,
+            // phones: (state) => state.addsign.phone,
+            address: (state) => state.addsign.address,
+        }),
+    },
     methods: {
+        ...mapMutations({
+            updateState: "addsign/updateState",
+        }),
         getTime() {
             this.show = true;
         },
@@ -161,31 +171,29 @@ export default {
             this.show = false;
         },
         addrresSearch() {
-            this.$store.commit("getObj", {
-                company: this.company,
-                phone: this.phone,
-            });
+            this.updateState({ key: "company", value: this.company });
+            this.updateState({ key: "phone", value: this.phone });
             wx.navigateTo({ url: "/pages/sign/suggestionsite" });
         },
         async addsing() {
             //获取坐标
             let { longitude, latitude } = wx.getStorageSync("site");
             let start_time = new Date(this.start_time).getTime();
+            let location = {
+                lat: this.address.latitude,
+                lng: this.address.longitude,
+            };
+            let address = { ...this.address, location };
             let result = await addSign({
                 company: this.company,
                 phone: this.phone,
                 form_id: "1566sb",
-                address: this.address,
+                address: JSON.stringify(address),
                 longitude,
                 latitude,
                 start_time,
                 description: this.description,
             });
-            console.log(12131);
-            if (result.code === 0) {
-                //跳转到面试列表
-                wx.navigateTo({ url: "/pages/sign/signList" });
-            }
         },
         //添加面试
         addsign() {
@@ -207,6 +215,8 @@ export default {
             })
                 .then(() => {
                     this.addsing();
+                    //跳转到面试列表
+                    wx.navigateTo({ url: "/pages/sign/signList" });
                 })
                 .catch(() => {
                     return false;

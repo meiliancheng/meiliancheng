@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>实现简单的发布订阅</title>
+    </head>
+    <body>
+        <script>
+            function MessageCenter() {
+                let message = {}; //存放消息的对象
+
+                this.register = function (messageType) {
+                    if (typeof message[messageType] == "undefined") {
+                        message[messageType] = [];
+                    } else {
+                        console.log("消息已经被注册");
+                    }
+                }; //进行消息注册
+                this.subscribe = function (messageType, func) {
+                    if (typeof message[messageType] != "undefined") {
+                        message[messageType].push(func);
+                    } else {
+                        console.log("消息未注册，不能进行订阅");
+                    }
+                }; //进行消息订阅，传入的2个参数，messageType是消息标识
+                //func,订阅后等待要执行的回调函数
+                this.fire = function (messageType, args) {
+                    if (typeof message[messageType] == "undefined") {
+                        console.log("消息未注册，不能进行发布");
+                        return false;
+                    }
+                    let events = {
+                        type: messageType,
+                        args: args || {},
+                    };
+                    console.log(message[messageType]);
+                    message[messageType].forEach(function (item) {
+                        item(events);
+                        // console.log(item(events));
+                    });
+                }; //发布消息,传入的2个参数,essageType是消息标识,args是要
+                //操作的数据
+            }
+            let messae = new MessageCenter();
+            messae.register("benben");
+            messae.register("zhangsan");
+            messae.subscribe("zhangsan", getname);
+            messae.subscribe("benben", subsfun);
+            messae.fire("benben", "你好");
+            messae.fire("zhangsan", "好的");
+            function subsfun(event) {
+                // console.log(event.type, event.args); //笨笨,你好
+            }
+            function getname(event) {
+                // console.log(event.type, event.args); //笨笨,你好
+            }
+        </script>
+    </body>
+</html>
