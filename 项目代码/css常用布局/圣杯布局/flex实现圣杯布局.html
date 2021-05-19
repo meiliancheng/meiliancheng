@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>三栏布局，左右定宽中间自适应</title>
+        <style>
+            .left {
+                width: 200px;
+                height: 500px;
+                background-color: skyblue;
+            }
+            .center {
+                flex: 1;
+                height: 500px;
+                background-color: rgb(159, 197, 89);
+            }
+            .right {
+                width: 200px;
+                height: 500px;
+                background-color: pink;
+            }
+            .parent {
+                display: flex;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="parent">
+            <div class="left"></div>
+            <div class="center">123213</div>
+
+            <div class="right"></div>
+        </div>
+    </body>
+</html>

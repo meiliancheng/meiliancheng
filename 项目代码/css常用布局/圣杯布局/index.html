@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>三栏布局，左右定宽中间自适应</title>
+        <style>
+            .left {
+                width: 200px;
+                height: 500px;
+                background-color: skyblue;
+            }
+            .center {
+                height: 500px;
+                background-color: rgb(159, 197, 89);
+            }
+            .right {
+                width: 200px;
+                height: 500px;
+                background-color: pink;
+            }
+            /* 第一步：三个盒子均设置左浮动 */
+            .left,
+            .center,
+            .right {
+                float: left;
+            }
+            /* 第二步：中间设置百分之百宽度 */
+            .center {
+                width: 100%;
+            }
+            /* 第三步:给父元素填充，挤压中间盒子内容，留出位置给左右盒子 */
+            .parent {
+                padding-left: 210px;
+                padding-right: 210px;
+            }
+            /* 第四步：移动左盒子 */
+            .left {
+                /* 左盒子应该在center盒子前面，所以左盒子向左移动中间盒子的100% ，左边和中间盒子对齐*/
+                margin-left: -100%;
+                /* 左盒子不脱离文档流定位，没设置left则默认为0，left=-210px表示向左移动210px */
+                position: relative;
+                left: -210px;
+            }
+            /* 第五步：移动右盒子 */
+            .right {
+                /* 右盒子向左移动200px右边和center右边对齐 */
+                margin-left: -200px;
+                /* 左盒子不脱离文档流定位 ，定位到右边margin上面*/
+                position: relative;
+                right: -210px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="parent">
+            <div class="center">123213</div>
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+    </body>
+</html>

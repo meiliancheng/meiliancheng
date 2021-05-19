@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .left {
+                width: 100px;
+                height: 100px;
+                background-color: red;
+            }
+            .center {
+                width: 200px;
+                height: 150px;
+                background-color: green;
+            }
+            .right {
+                height: 200px;
+                background-color: blue;
+            }
+            /* 方案一：float + margin 属性实现； */
+            /* .left,
+            .center {
+                float: left;
+            }
+            .right {
+                margin-left: 300px;
+            } */
+
+            /* 左中设置 float: left;右设置 overflow: hidden; */
+            /* .left,
+            .center {
+                float: left;
+            }
+            .right {
+                overflow: hidden;
+            } */
+
+            /* flex 的设置
+             */
+            /* .wrapper {
+                display: flex;
+            }
+            .right {
+                flex: 1;
+            } */
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="left">左边定宽</div>
+            <div class="center">中间定宽</div>
+            <div class="right">右边自适应</div>
+        </div>
+    </body>
+</html>

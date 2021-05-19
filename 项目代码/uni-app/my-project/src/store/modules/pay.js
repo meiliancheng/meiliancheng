@@ -11,10 +11,8 @@ const mutations = {
 };
 const actions = {
     async getPayInfo({ commit }, payload) {
-        console.log(payload);
         let result = await pay(payload);
-        console.l
-    
+
         commit("updateState", result.data);
     },
 };

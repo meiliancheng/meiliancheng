@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <button onclick="modify()">add</button>
+        <span id="count">0</span>
+        <button onclick="modify()">reduce</button>
+        <script>
+            // function modify() {
+            //     console.log(this); //window
+            // }
+            // 谁调用指向谁，函数都没被调用，确实不知道指向。
+            var liLei = {
+                name: "liLei",
+                money: 10,
+                buyPen: function () {
+                    this.money = this.money - 1;
+                    console.log(this.name + " have money:" + this.money);
+                },
+            };
+
+            var hanMeiMei = {
+                name: "hanMeiMei",
+                money: 20,
+                buyPan: function () {
+                    this.money = this.money - 2;
+                    console.log(this.name + " have money:" + this.money);
+                },
+            };
+
+            liLei.buyPen(); // liLei have money:9
+            // hanMeiMei.buyPan(); //hanMeiMei have money:18
+            // liLei.buyPen.call(hanMeiMei); //hanMeiMei have money:19
+            liLei.buyPen.bind(hanMeiMei); //hanMeiMei have money:19
+
+            // ：apply接受的参数为一个数组，call接收的参数为一个个独立的值；apply，
+            // call会直接调用方法，bind改变this的指向返回一个方法不调用。
+
+            // var a = 1;
+            // function printA() {
+            //     console.log(this);
+            //     console.log(this.a);
+            // }
+            // var obj = {
+            //     a: 2,
+            //     foo: printA,
+            //     bar: function () {
+            //         printA();
+
+            //         console.log(this);
+            //     },
+            // };
+            // obj.foo(); //2
+            // obj.bar(); //1
+        </script>
+    </body>
+</html>

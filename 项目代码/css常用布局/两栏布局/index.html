@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>两栏布局</title>
+        <style>
+            .left {
+                width: 200px;
+                height: 500px;
+                background-color: red;
+            }
+            .right {
+                height: 500px;
+                background-color: blue;
+            }
+            /* 方案一：float + margin 属性实现
+            优点：实现方式简单
+            缺点：自适应元素 margin 属性值需要与定宽元素的 width  属性值保持一致；
+                定宽元素浮动与自适应元素不浮动导致浏览器兼容性不好；
+             */
+            /* .left {
+                float: left;
+            }
+            .right {
+                margin-left: 200px;
+            } */
+
+            /* float + overflow 属性实现 
+               优点: 简单易用 全兼容
+                缺点: overflow 属性不仅解决了两列布局问题，同时设置了内容溢出的情况
+            */
+            /* .left {
+                float: left;
+            }
+            .right {
+                overflow: hidden;
+            } */
+
+            /* 方案五：使用 flex 实现 */
+            .wrapper {
+                display: flex; /* 子元素 - 水平排列 */
+            }
+
+            .right {
+                flex: 1; /* 剩余部分让他填充 */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="left">左边定宽</div>
+            <div class="right">右边自适应</div>
+        </div>
+    </body>
+</html>
