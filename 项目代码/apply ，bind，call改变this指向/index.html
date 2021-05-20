@@ -18,9 +18,15 @@
             var liLei = {
                 name: "liLei",
                 money: 10,
-                buyPen: function () {
-                    this.money = this.money - 1;
+                buyPen: function (...args) {
+                    this.money = this.money - 3;
+
+                    // if (args.length < 0) {
+                    //     let { name1, age1 } = args[0];
+                    // }
+
                     console.log(this.name + " have money:" + this.money);
+                    // console.log(name1 + age1);
                 },
             };
 
@@ -33,29 +39,11 @@
                 },
             };
 
-            liLei.buyPen(); // liLei have money:9
-            // hanMeiMei.buyPan(); //hanMeiMei have money:18
-            // liLei.buyPen.call(hanMeiMei); //hanMeiMei have money:19
-            liLei.buyPen.bind(hanMeiMei); //hanMeiMei have money:19
-
             // ：apply接受的参数为一个数组，call接收的参数为一个个独立的值；apply，
             // call会直接调用方法，bind改变this的指向返回一个方法不调用。
+            liLei.buyPen.bind(hanMeiMei);
+            liLei.buyPan();
 
-            // var a = 1;
-            // function printA() {
-            //     console.log(this);
-            //     console.log(this.a);
-            // }
-            // var obj = {
-            //     a: 2,
-            //     foo: printA,
-            //     bar: function () {
-            //         printA();
-
-            //         console.log(this);
-            //     },
-            // };
-            // obj.foo(); //2
             // obj.bar(); //1
         </script>
     </body>
