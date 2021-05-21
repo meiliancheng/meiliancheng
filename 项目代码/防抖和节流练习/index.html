@@ -5,10 +5,27 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+        <style>
+            .head {
+                width: 100%;
+                height: 40px;
+                background: #ccc;
+                position: sticky;
+                top: 10px;
+            }
+            .laylout {
+                width: 100%;
+                height: 1200px;
+            }
+        </style>
     </head>
     <body>
         防抖后的input <input type="text" id="inputbox" /> 节流后的input
         <input type="text" id="throttle" />
+        <div class="head">
+            <h3>title</h3>
+        </div>
+        <div class="laylout"></div>
         <script>
             function ajax(content) {
                 console.log("ajax request " + content);
@@ -17,6 +34,7 @@
             function debounce(fun, delay) {
                 return function (args) {
                     let that = this;
+                    console.log(this);
                     let _args = args;
                     clearTimeout(fun.id);
                     fun.id = setTimeout(function () {
@@ -27,7 +45,7 @@
 
             let inputb = document.getElementById("inputbox");
 
-            let debounceAjax = debounce(ajax, 500);
+            let debounceAjax = debounce(ajax, 2000);
 
             inputb.addEventListener("keyup", function (e) {
                 debounceAjax(e.target.value);
@@ -52,7 +70,7 @@
                 };
             }
 
-            let throttleAjax = throttle(ajax, 1000);
+            let throttleAjax = throttle(ajax, 3000);
 
             let inputc = document.getElementById("throttle");
             inputc.addEventListener("keyup", function (e) {
