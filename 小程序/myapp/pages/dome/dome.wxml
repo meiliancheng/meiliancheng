@@ -1,0 +1,25 @@
+<view class="container">
+  <slot></slot>
+  <text>{{50+67}}</text>
+  <text>{{10>20?"true":"false"}}</text>
+  {{name}}
+  <!-- {{ids}} -->
+  <view id="my-{{ids[0]}}">动态id---{{ids[0]}}</view>
+  <view id="my-{{ids[1]}}">动态id---{{ids[1]}}</view>
+  <view id="my-{{ids[2]}}">动态id---{{ids[2]}}</view>
+  ----------
+  <view wx:for="{{list}}" wx:key="index">
+    {{item}}----{{index}}
+  </view>
+  ----------------
+  <view wx:for="{{list}}" wx:for-item="k" wx:for-index="i" wx:key="i">
+    {{k}}---{{i}}
+  </view>
+  <view wx:if="{{isCreated}}">显示 Dom 元素</view>
+  <view wx:else="{{isCreated}}">隐藏 Dom 元素</view>
+  <view hidden="{{isHidden}}">我是动态隐藏显示</view>
+  <!-- catchtap 阻止事件冒泡行为 -->
+  <!-- capture-bind:touchstart 事件捕获  开始 可以继续执行 -->
+  <!-- capture-catch:touchstart  停止执行 -->
+  <button type="primary"  bindtap="handelTap">点击切换名字</button>
+</view>

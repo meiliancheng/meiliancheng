@@ -1,0 +1,12 @@
+<!--pages/request/request.wxml-->
+
+<!-- <text>pages/request/request.wxml</text> -->
+
+<wxs src="./request.wxs" module="Name"></wxs>
+<button type="primary" bindtap="handelData">请求</button>
+<view wx:for="{{list}}" wx:key="index">
+ <view class="box">
+  {{item.nm}}
+  <image class="item" src="{{item.img}}" mode="widthFix"></image>
+ </view>
+</view>

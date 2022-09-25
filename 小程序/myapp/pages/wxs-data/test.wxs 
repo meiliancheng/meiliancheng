@@ -1,0 +1,6 @@
+var bar = function (d) {
+  return 1111;
+}
+module.exports = {
+  bar: bar,
+};

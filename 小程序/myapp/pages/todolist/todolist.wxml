@@ -1,0 +1,8 @@
+<!--pages/todolist/todolist.wxml-->
+<view class="box">
+  <input type="text"  bindinput="handelInput" value="{{value}}"/>
+  <button type="primary" size="mini" bindtap="handelAdd">添加</button>
+</view>
+<view wx:for="{{list}}" wx:key="index">
+  <view class="list-box"><text>{{item}}</text> <button type="warn" size="mini" bindtap="currentReemove" data-index="{{index}}">删除</button></view>
+</view>

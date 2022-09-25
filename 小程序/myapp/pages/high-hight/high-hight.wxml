@@ -1,0 +1,9 @@
+<!--pages/high-hight/high-hight.wxml-->
+<view class="hightBox">
+  <view wx:for="{{dataList}}" wx:key="index" 
+  bindtap="changeTab"
+  data-myIndex="{{index}}"
+   class="item {{index===current?'active':''}}">
+   <text> {{item}} </text>
+  </view>
+</view> 

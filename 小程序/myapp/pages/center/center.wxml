@@ -1,0 +1,4 @@
+<view class="container">
+  <slot></slot>
+  我的页面
+</view>

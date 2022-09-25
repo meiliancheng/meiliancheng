@@ -1,0 +1,4 @@
+<view class="container">
+  <slot></slot>
+  首页 
+</view>

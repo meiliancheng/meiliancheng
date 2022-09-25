@@ -1,0 +1,7 @@
+<!--pages/wxs-data/wxs-data.wxml-->
+<!-- <text>pages/wxs-data/wxs-data.wxml</text> -->
+
+<wxs src="test.wxs" module="bar" />
+<view>
+  bar
+</view>

@@ -1,0 +1,7 @@
+/* pages/wxs-data/wxs-data.wxss */
+.box{
+  display: flex;
+}
+.item{
+  height: 20px;
+}
